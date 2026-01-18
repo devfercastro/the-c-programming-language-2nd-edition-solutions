@@ -1,0 +1,13 @@
+[
+  {
+    "label": "Debug Current C File",
+    "build": {
+      "command": "gcc",
+      "args": ["-g", "$ZED_FILE", "-o", "$ZED_DIRNAME/$ZED_STEM.out"],
+      "cwd": "$ZED_DIRNAME",
+    },
+    "program": "$ZED_DIRNAME/$ZED_STEM.out",
+    "request": "launch",
+    "adapter": "CodeLLDB",
+  },
+]

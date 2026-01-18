@@ -1,0 +1,11 @@
+[
+  {
+    "label": "Compile and Run C",
+    "command": "zsh",
+    "args": [
+      "-c",
+      "'echo \"$ZED_DIRNAME\n$ZED_FILE\n$ZED_STEM\"; gcc -g \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM\".out && \"$ZED_DIRNAME/$ZED_STEM\".out'",
+    ],
+    "use_new_terminal": true,
+  },
+]
