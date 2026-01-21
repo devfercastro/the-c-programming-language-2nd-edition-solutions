@@ -6,14 +6,14 @@
 for fahr = 0, 20, ..., 300; floating-point version */
 int main() {
   float fahr, celsius;
-  float lower, upper, step;
+  int lower, upper, step;
   lower = 0;   /* lower limit of temperatuire scale */
   upper = 300; /* upper limit */
   step = 20;   /* step size */
   celsius = lower;
   printf(" C  |  F\n");
   while (celsius <= upper) {
-    fahr = (celsius / (5.0 / 9.0)) + 32.0;
+    fahr = celsius * (9.f / 5.f) + 32.f;
     printf("%3.0f |%6.1f\n", celsius, fahr);
     celsius += step;
   }
