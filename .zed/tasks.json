@@ -4,8 +4,16 @@
     "command": "zsh",
     "args": [
       "-c",
-      "'gcc -g \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM\".out && \"$ZED_DIRNAME/$ZED_STEM\".out'",
+      "'gcc -g \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\"'",
     ],
     "use_new_terminal": true,
+  },
+  {
+    "label": "Compile, Run and Pass Input C",
+    "command": "zsh",
+    "args": [
+      "-c",
+      "'gcc -g \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\" < \"$ZED_DIRNAME/input.txt\"'",
+    ],
   },
 ]
