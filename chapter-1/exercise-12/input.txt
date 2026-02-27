@@ -1,0 +1,4 @@
+Word Word-after-blank	Word-after-tab
+Word-after-newline
+
+Word-after-two-newline		Word-after-two-tabs

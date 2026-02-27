@@ -1,0 +1,2 @@
+Word1	word2aftertab word3afterblank
+word4afternewline
