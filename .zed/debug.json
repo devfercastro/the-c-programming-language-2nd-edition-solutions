@@ -10,4 +10,16 @@
     "request": "launch",
     "adapter": "CodeLLDB",
   },
+  {
+    "label": "Debug with input.txt",
+    "build": {
+      "command": "gcc",
+      "args": ["-g", "$ZED_FILE", "-o", "$ZED_DIRNAME/$ZED_STEM.out"],
+      "cwd": "$ZED_DIRNAME",
+    },
+    "program": "$ZED_DIRNAME/$ZED_STEM.out",
+    "request": "launch",
+    "adapter": "CodeLLDB",
+    "stdio": ["$ZED_DIRNAME/input.txt", null, null],
+  },
 ]
