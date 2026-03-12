@@ -1,0 +1,12 @@
+This is a 
+test of 
+the 
+folding 
+program.
+AveryLongW
+ordWithout
+Spaces
+tab       
+another   
+one
+t        
