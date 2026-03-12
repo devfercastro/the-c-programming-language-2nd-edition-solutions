@@ -13,7 +13,7 @@
     "command": "zsh",
     "args": [
       "-c",
-      "'gcc -g \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\" < \"$ZED_DIRNAME/input.txt\"'",
+      "'gcc -g \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\" < \"$ZED_DIRNAME/input.txt\" | tee \"$ZED_DIRNAME/output.txt\"'",
     ],
   },
 ]
