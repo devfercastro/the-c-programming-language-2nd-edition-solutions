@@ -1,0 +1,21 @@
+
+#include <stdio.h>
+
+
+int main() {
+  
+  int a = 1; 
+  
+  
+  printf("She said, \"Hello // World!\"");
+  
+  
+  char d_quote = '"';
+  char s_quote = '\'';
+  char b_slash = '\\';
+  
+  
+  printf("/* This is strictly a string */");
+  
+  return 0;
+}

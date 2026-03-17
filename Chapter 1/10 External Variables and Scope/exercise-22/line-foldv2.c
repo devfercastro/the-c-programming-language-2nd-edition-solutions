@@ -77,6 +77,7 @@ int main(void) {
     i = inc_i(i, 1);
     ++col;
 
+    // this needs to be updated after the column indicator is updated
     if (c == ' ')
       blank_col = col;
 

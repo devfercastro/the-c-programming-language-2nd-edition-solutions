@@ -1,0 +1,23 @@
+// Test input generated with gemini because I'm lazy
+#include <stdio.h>
+
+/* 1. Quotes inside multi-line comments
+ * don't break this! '"'"' 
+ */
+int main() {
+  // 2. Quotes inside single-line: don't break here either!
+  int a = 1; // 3. Trailing comment with a quote '
+  
+  // 4. Escaped quotes and comments INSIDE strings
+  printf("She said, \"Hello // World!\"");
+  
+  // 5. Tricky Character Literals
+  char d_quote = '"';
+  char s_quote = '\'';
+  char b_slash = '\\';
+  
+  // 6. Strings mimicking multi-line comments
+  printf("/* This is strictly a string */");
+  
+  return 0;
+}
