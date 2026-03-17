@@ -6,7 +6,7 @@
       "-c",
       "'gcc -g \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\"'",
     ],
-    "use_new_terminal": true,
+    "use_new_terminal": false,
   },
   {
     "label": "Compile, Run and Pass Input C",
@@ -15,5 +15,6 @@
       "-c",
       "'gcc -g \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\" < \"$ZED_DIRNAME/input.txt\" | tee \"$ZED_DIRNAME/output.txt\"'",
     ],
+    "use_new_terminal": false,
   },
 ]
