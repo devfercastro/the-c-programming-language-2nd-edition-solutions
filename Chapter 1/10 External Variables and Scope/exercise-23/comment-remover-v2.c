@@ -2,8 +2,8 @@
 // forget to handle quoted strings and character constants properly. C comments
 // don't nest.
 //
-// Modify solution from "The C Answer Book" page 38
-// `remove_comment` and `in_comment` functions were modify to support both
+// Modified solution from "The C Answer Book" page 38
+// `remove_comment` and `in_comment` functions were modified to support both
 // single and multi line comments
 #include <stdio.h>
 
@@ -39,17 +39,17 @@ void remove_comment(int curr) {
 }
 
 void in_comment(int type) {
-  int curr;
+  int curr, next;
 
   while ((curr = getchar()) != EOF) {
     // if type is '*' means multi line comment
-    // look for the "*/" pair and break
-    if (type == '*' && curr == '*' && (curr = getchar()) == '/')
+    // check for "*/" pair and break
+    if (type == '*' && curr == '*' && (next = getchar()) == '/')
       break;
     // if type is '/' means single line comment
-    // look for a '\n' and break
+    // check for '\n' and break
     else if (type == '/' && curr == '\n') {
-      // print the newline otherwise program can broke indentation
+      // print the newline otherwise program can brake indentation
       putchar(curr);
       break;
     }
