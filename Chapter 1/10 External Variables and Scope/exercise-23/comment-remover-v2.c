@@ -41,11 +41,22 @@ void remove_comment(int curr) {
 void in_comment(int type) {
   int curr, next;
 
-  while ((curr = getchar()) != EOF) {
+  curr = getchar();
+
+  while (curr != EOF) {
     // if type is '*' means multi line comment
     // check for "*/" pair and break
-    if (type == '*' && curr == '*' && (next = getchar()) == '/')
-      break;
+    if (type == '*' && curr == '*') {
+      next = getchar();
+
+      if (next == '/')
+        break;
+
+      // `next` swallowed a char, this prevent from miss it
+      curr = next;
+      continue; // `curr` is already updated continue
+
+    }
     // if type is '/' means single line comment
     // check for '\n' and break
     else if (type == '/' && curr == '\n') {
@@ -53,6 +64,8 @@ void in_comment(int type) {
       putchar(curr);
       break;
     }
+
+    curr = getchar(); // continue from the next char
   }
 }
 

@@ -3,7 +3,7 @@
 
 /* 1. Quotes inside multi-line comments
  * don't break this! '"'"' 
- */
+ **/
 int main() {
   // 2. Quotes inside single-line: don't break here either!
   int a = 1; // 3. Trailing comment with a quote '
