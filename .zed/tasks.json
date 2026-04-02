@@ -1,7 +1,13 @@
 [
   {
-    "label": "Compile and Run C",
-    "command": "zsh",
+    "label": "Compile C",
+    "command": "bash",
+    "args": ["-c", "'gcc -g \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\"'"],
+    "use_new_terminal": false,
+  },
+  {
+    "label": "Run C",
+    "command": "bash",
     "args": [
       "-c",
       "'gcc -g \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\"'",
@@ -9,8 +15,8 @@
     "use_new_terminal": false,
   },
   {
-    "label": "Compile, Run and Pass Input C",
-    "command": "zsh",
+    "label": "Run + Input C",
+    "command": "bash",
     "args": [
       "-c",
       "'gcc -g \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\" < \"$ZED_DIRNAME/input.txt\" | tee \"$ZED_DIRNAME/output.txt\"'",
