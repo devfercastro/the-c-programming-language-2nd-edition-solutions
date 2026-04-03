@@ -1,42 +1,38 @@
 [
   {
     "label": "Compile C",
-    "command": "gcc",
+    "command": "bash",
     "args": [
-      "-std=c17", "-Wall", "-Wextra", "-pedantic", "-g", "-Og",
-      "${ZED_FILE}", "-o", "${ZED_DIRNAME}/${ZED_STEM}.out"
+      "-c",
+      "'gcc -Wall -Wextra -pedantic -g -Og \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\"'",
     ],
-    "cwd": "${ZED_DIRNAME}",
-    "use_new_terminal": false
+    "use_new_terminal": false,
   },
   {
     "label": "Run C",
     "command": "bash",
     "args": [
       "-c",
-      "gcc -std=c17 -Wall -Wextra -pedantic -g -Og ${ZED_FILE} -o ${ZED_DIRNAME}/${ZED_STEM}.out && ${ZED_DIRNAME}/${ZED_STEM}.out"
+      "'gcc -Wall -Wextra -pedantic -g -Og \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\"'",
     ],
-    "cwd": "${ZED_DIRNAME}",
-    "use_new_terminal": true
+    "use_new_terminal": false,
   },
   {
-    "label": "Run C (with input.txt)",
+    "label": "Run + Input C",
     "command": "bash",
     "args": [
       "-c",
-      "gcc -std=c17 -Wall -Wextra -pedantic -g -Og ${ZED_FILE} -o ${ZED_DIRNAME}/${ZED_STEM}.out && ${ZED_DIRNAME}/${ZED_STEM}.out < ${ZED_DIRNAME}/input.txt | tee ${ZED_DIRNAME}/output.txt"
+      "'gcc -Wall -Wextra -pedantic -g -Og \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\" < \"$ZED_DIRNAME/input.txt\" | tee \"$ZED_DIRNAME/output.txt\"'",
     ],
-    "cwd": "${ZED_DIRNAME}",
-    "use_new_terminal": true
+    "use_new_terminal": false,
   },
   {
-    "label": "Run C (Sanitizers)",
+    "label": "Run C (Sanitazers)",
     "command": "bash",
     "args": [
       "-c",
-      "gcc -std=c17 -Wall -Wextra -pedantic -g -O1 -fsanitize=address,undefined ${ZED_FILE} -o ${ZED_DIRNAME}/${ZED_STEM}.san && ${ZED_DIRNAME}/${ZED_STEM}.san"
+      "'gcc -std=c17 -Wall -Wextra -pedantic -g -O1 -fsanitize=address,undefined \"${ZED_FILE}\" -o \"${ZED_DIRNAME}/${ZED_STEM}.san\" && \"${ZED_DIRNAME}/${ZED_STEM}.san\"'",
     ],
-    "cwd": "${ZED_DIRNAME}",
-    "use_new_terminal": true
-  }
+    "use_new_terminal": false,
+  },
 ]
