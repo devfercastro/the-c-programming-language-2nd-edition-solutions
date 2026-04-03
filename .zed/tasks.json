@@ -1,26 +1,42 @@
 [
   {
     "label": "Compile C",
-    "command": "bash",
-    "args": ["-c", "'gcc -g \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\"'"],
-    "use_new_terminal": false,
+    "command": "gcc",
+    "args": [
+      "-std=c17", "-Wall", "-Wextra", "-pedantic", "-g", "-Og",
+      "${ZED_FILE}", "-o", "${ZED_DIRNAME}/${ZED_STEM}.out"
+    ],
+    "cwd": "${ZED_DIRNAME}",
+    "use_new_terminal": false
   },
   {
     "label": "Run C",
     "command": "bash",
     "args": [
       "-c",
-      "'gcc -g \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\"'",
+      "gcc -std=c17 -Wall -Wextra -pedantic -g -Og ${ZED_FILE} -o ${ZED_DIRNAME}/${ZED_STEM}.out && ${ZED_DIRNAME}/${ZED_STEM}.out"
     ],
-    "use_new_terminal": false,
+    "cwd": "${ZED_DIRNAME}",
+    "use_new_terminal": true
   },
   {
-    "label": "Run + Input C",
+    "label": "Run C (with input.txt)",
     "command": "bash",
     "args": [
       "-c",
-      "'gcc -g \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\" < \"$ZED_DIRNAME/input.txt\" | tee \"$ZED_DIRNAME/output.txt\"'",
+      "gcc -std=c17 -Wall -Wextra -pedantic -g -Og ${ZED_FILE} -o ${ZED_DIRNAME}/${ZED_STEM}.out && ${ZED_DIRNAME}/${ZED_STEM}.out < ${ZED_DIRNAME}/input.txt | tee ${ZED_DIRNAME}/output.txt"
     ],
-    "use_new_terminal": false,
+    "cwd": "${ZED_DIRNAME}",
+    "use_new_terminal": true
   },
+  {
+    "label": "Run C (Sanitizers)",
+    "command": "bash",
+    "args": [
+      "-c",
+      "gcc -std=c17 -Wall -Wextra -pedantic -g -O1 -fsanitize=address,undefined ${ZED_FILE} -o ${ZED_DIRNAME}/${ZED_STEM}.san && ${ZED_DIRNAME}/${ZED_STEM}.san"
+    ],
+    "cwd": "${ZED_DIRNAME}",
+    "use_new_terminal": true
+  }
 ]

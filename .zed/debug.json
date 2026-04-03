@@ -1,25 +1,49 @@
 [
   {
-    "label": "Debug Current C File",
+    "label": "Debug C (Standard)",
     "build": {
       "command": "gcc",
-      "args": ["-g", "$ZED_FILE", "-o", "$ZED_DIRNAME/$ZED_STEM.out"],
-      "cwd": "$ZED_DIRNAME",
+      "args": [
+        "-std=c17", "-Wall", "-Wextra", "-pedantic", "-g", "-Og",
+        "${ZED_FILE}", "-o", "${ZED_DIRNAME}/${ZED_STEM}.out"
+      ],
+      "cwd": "${ZED_DIRNAME}"
     },
-    "program": "$ZED_DIRNAME/$ZED_STEM.out",
+    "program": "${ZED_DIRNAME}/${ZED_STEM}.out",
     "request": "launch",
-    "adapter": "CodeLLDB",
+    "adapter": "CodeLLDB"
   },
   {
-    "label": "Debug with input.txt",
+    "label": "Debug C (with input.txt)",
     "build": {
       "command": "gcc",
-      "args": ["-g", "$ZED_FILE", "-o", "$ZED_DIRNAME/$ZED_STEM.out"],
-      "cwd": "$ZED_DIRNAME",
+      "args": [
+        "-std=c17", "-Wall", "-Wextra", "-pedantic", "-g", "-Og",
+        "${ZED_FILE}", "-o", "${ZED_DIRNAME}/${ZED_STEM}.out"
+      ],
+      "cwd": "${ZED_DIRNAME}"
     },
-    "program": "$ZED_DIRNAME/$ZED_STEM.out",
+    "program": "${ZED_DIRNAME}/${ZED_STEM}.out",
     "request": "launch",
     "adapter": "CodeLLDB",
-    "stdio": ["$ZED_DIRNAME/input.txt", null, null],
+    "stdio": ["${ZED_DIRNAME}/input.txt", null, null]
   },
+  {
+    "label": "Debug C (Sanitizers)",
+    "build": {
+      "command": "gcc",
+      "args": [
+        "-std=c17", "-Wall", "-Wextra", "-pedantic", "-g", "-O1",
+        "-fsanitize=address,undefined", "${ZED_FILE}", "-o", "${ZED_DIRNAME}/${ZED_STEM}.san"
+      ],
+      "cwd": "${ZED_DIRNAME}"
+    },
+    "program": "${ZED_DIRNAME}/${ZED_STEM}.san",
+    "request": "launch",
+    "adapter": "CodeLLDB",
+    "environment": [
+      {"name": "ASAN_OPTIONS", "value": "detect_leaks=1:abort_on_error=1:halt_on_error=1"},
+      {"name": "UBSAN_OPTIONS", "value": "print_stacktrace=1:abort_on_error=1:halt_on_error=1"}
+    ]
+  }
 ]
