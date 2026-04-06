@@ -22,7 +22,7 @@ int main(void) {
   // int
   printf("signed int range: (%d, %d)\n", INT_MIN, INT_MAX);
   // %u has more range than %d
-  printf("unsigned long range: (0, %u)\n", UINT_MAX);
+  printf("unsigned int range: (0, %u)\n", UINT_MAX);
 
   putchar('\n');
 
@@ -33,17 +33,17 @@ int main(void) {
   putchar('\n');
 
   // float
-  // `FLT_MIN` is the minimun normalized number posible with IEEE 754 meaning 0, same goes for double and long double
+  // `FLT_MIN` is the minimun normalized number posible with IEEE 754, same goes for double and long double
   // The %f only prints up to 6 decimal points
   printf("float range: (%e, %e)\n", -FLT_MAX, FLT_MAX);
 
   putchar('\n');
 
   // double
-  printf("double range: (%e, %e)\n", DBL_MIN, DBL_MAX);
+  printf("double range: (%e, %e)\n", -DBL_MAX, DBL_MAX);
 
   putchar('\n');
 
   // long double
-  printf("long double range: (%Le, %Le)\n", LDBL_MIN, LDBL_MAX);
+  printf("long double range: (%Le, %Le)\n", -LDBL_MAX, LDBL_MAX);
 }
