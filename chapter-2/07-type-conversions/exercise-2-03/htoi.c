@@ -7,7 +7,7 @@
 /* lower: convert c to lower case; ASCII only */
 int lower(int c) {
   if (c >= 'A' && c <= 'Z')
-    return c + 'a' - 'A';
+    return (c + 'a') - 'A';
   else
     return c;
 }
@@ -50,9 +50,9 @@ int hex_s_to_dec(char c) {
   int n = 0;         // just to avoid a compiler warning
   int lc = lower(c); // make sure everything is lower case
 
-  if (c >= '0' && c <= '9')
+  if (c >= '0' && c <= '9') // digit to int
     n = c - '0';
-  else if (lc >= 'a' && lc <= 'f')
+  else if (lc >= 'a' && lc <= 'f') // letter to int
     n = (lc - 'a') + 10;
 
   return n;
@@ -67,6 +67,8 @@ int htoi(char s[]) {
     i += 2;
 
   for (; valid_hex(s[i]); ++i) {
+    // similar to htoi snippet but here to move one digit to the right I need to
+    // multiply the number by 16
     n = (16 * n) + hex_s_to_dec(s[i]);
   }
 
