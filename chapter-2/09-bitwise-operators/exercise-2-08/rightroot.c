@@ -92,7 +92,7 @@ unsigned rightrot(unsigned int x, unsigned int n) {
     // rigth shift x
     x = x >> 1;
     // activate x leftmost bit
-    x = x | ~(~0 >> 1); 
+    x = x | ~(~0U >> 1); 
   }
 
   return wbits & x;
