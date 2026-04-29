@@ -4,8 +4,9 @@
 // the same job but returns a pointer to the location.)
 #include <stdio.h>
 
-int any(char s1[], char s2[]); /* Your implementation */
+int any(char s1[], char s2[]);
 
+// ai generated
 void test(char *s1, char *s2, int expected) {
   int result = any(s1, s2);
   int pass = (result == expected);
@@ -44,7 +45,7 @@ int any(char s1[], char s2[]) {
   for (i = 0; s1[i] != '\0'; ++i)
     // iterate through each `s2` char for every `s1` char
     for (j = 0; s2[j] != '\0'; ++j)
-      // if chars matches return `i` position
+      // if chars matches return current `i` position
       if (s1[i] == s2[j])
         return i;
 
