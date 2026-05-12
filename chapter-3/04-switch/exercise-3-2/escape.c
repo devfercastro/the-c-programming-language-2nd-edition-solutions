@@ -5,8 +5,6 @@
 #include <stdio.h>
 #include <string.h>
 
-enum STATE { IN, OUT };
-
 void escape(char s[], char t[]);
 void unescape(char s[], char t[]);
 
