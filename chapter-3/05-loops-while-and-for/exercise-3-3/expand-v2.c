@@ -4,11 +4,11 @@
 // prepared to handle cases like a-b-c and a-z0-9 and -a-z. Arrange that a
 // leading or trailing - is taken literally.
 //
-// Cases like a-9 or 0-z will kinda break the code but I don't care, so...
+// Solution based on book C Answer Book
+// Book's solution is way cooler
 #include <stdio.h>
 #include <string.h>
 
-int isValid(char c);
 void expand(char s1[], char s2[]);
 
 // ai generated tests
@@ -45,45 +45,25 @@ int main(void) {
   test("text mixed with range", "0a-z9", "0abcdefghijklmnopqrstuvwxyz9");
 }
 
-int isValid(char c) {
-  return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
-         (c >= '0' && c <= '9');
-}
-
 void expand(char s1[], char s2[]) {
-  int i, j, p, c, n;
+  int i, j; // i and j are to keep track of s1 and s2
+  // are meant to save the left, middle and right character of a secuence. i.e:
+  // a-z l = a, m = -, r = z
+  char l, m, r;
 
-  for (i = 0, j = 0; s1[i] != '\0'; ++i, ++j) {
-    c = s1[i];
+  i = j = 0;
+  while ((l = s1[i++]) != '\0') { // get the left char
+    m = s1[i];                    // get the middle char
 
-    if (c == '-') { // possible expand
-      // get prev and next
-      p = s1[i - 1];
-      n = s1[i + 1];
+    // if middle is the special char, and right is equal/bigger than left
+    if (m == '-' && s1[i + 1] >= l) {
+      r = s1[++i]; // get right char
 
-      // first or last char is '-' save it on s2 and continue
-      if (!p || !n) {
-        s2[j] = c;
-        continue;
-      }
+      while (l < r) // expand secuence until left equal right
+        s2[j++] = l++;
 
-      // check if both are valid
-      if (isValid(p) && isValid(n)) {
-        int start = p + 1, // +1 because prev is already saved
-            end = n;
-
-        for (; start <= end; ++start, ++j) { // expand
-          s2[j] = start;
-        }
-
-        --j; // remove the for's extra j's increment (outter loop will do it)
-        ++i; // to skip next char on following iter
-
-      } else // if not save all on s2
-        s2[j] = p, s2[++j] = c, s2[++j] = n;
-
-    } else // not an expand, just save the char on s2
-      s2[j] = c;
+    } else // middle is not the special char, just save left
+      s2[j++] = l;
   }
 
   s2[j] = '\0';
