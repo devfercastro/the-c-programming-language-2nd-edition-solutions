@@ -1,5 +1,14 @@
 [
   {
+    "label": "Run + Input + Test C",
+    "command": "bash",
+    "args": [
+      "-c",
+      "'gcc -Wall -Wextra -pedantic -g -Og -lm \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\" < \"$ZED_DIRNAME/input.txt\" > \"$ZED_DIRNAME/output.txt\" && diff --unified --color=always \"$ZED_DIRNAME/expected.txt\" \"$ZED_DIRNAME/output.txt\" && echo \"- TEST PASS\" || echo \"- TEST FAIL\"'",
+    ],
+    "use_new_terminal": false,
+  },
+  {
     "label": "Compile C",
     "command": "bash",
     "args": [
