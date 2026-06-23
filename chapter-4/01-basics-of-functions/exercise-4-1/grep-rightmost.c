@@ -52,13 +52,16 @@ int strindex(char s[], char t[]) {
     // comparing s chars with t chars until k = 0. Decrement i to end up with
     // the correct position of the pattern (if present) and decrement j and k to
     // keep comparing both s and t
-    for (j = i, k = tlen - 1; k > 0 && s[j] == t[k]; i--, j--, k--)
+    for (j = i, k = tlen - 1; k > 0 && s[j] == t[k]; j--, k--)
       ;
 
     // if k == 0 it means the whole pattern matches
     // otherwise the pattern is either not or barely complete in s
     if (k == 0)
-      return i;
+      // i is at the end of the pattern matched in s
+      // so substrack the length of t and add 1 to get the start position of the
+      // pattern
+      return (i - tlen) + 1;
   }
 
   return -1;
