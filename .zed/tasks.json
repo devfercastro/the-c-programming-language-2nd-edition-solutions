@@ -1,20 +1,37 @@
 [
   {
-    "label": "Run + Input + Test C",
-    "command": "bash",
-    "args": [
-      "-c",
-      "'gcc -Wall -Wextra -pedantic -g -Og -lm \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\" < \"$ZED_DIRNAME/input.txt\" > \"$ZED_DIRNAME/output.txt\" && diff --unified --color=always \"$ZED_DIRNAME/expected.txt\" \"$ZED_DIRNAME/output.txt\" && echo \"- TEST PASS\" || echo \"- TEST FAIL\"'",
-    ],
-    "use_new_terminal": false,
-  },
-  {
     "label": "Compile C",
-    "command": "bash",
+    "command": "gcc",
     "args": [
-      "-c",
-      "'gcc -Wall -Wextra -pedantic -g -Og -lm \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\"'",
+      // --- LANGUAGE STANDARD ---
+      "-std=c17", // Use the C17 standard (the modern C spec)
+
+      // --- WARNING FLAGS (catch bugs at compile time) ---
+      "-Wall", // Enable the most common warnings
+      "-Wextra", // Enable extra warnings beyond -Wall
+      "-pedantic", // Warn if code violates strict ISO C rules
+      "-Wshadow", // Warn when a variable hides another with the same name
+      "-Wconversion", // Warn on implicit type conversions that may lose data
+      "-Wstrict-prototypes", // Warn if a function is declared without specifying its params
+      "-Wmissing-prototypes", // Warn if a global function has no prior declaration
+      "-Wformat=2", // Strict checking of printf/scanf format strings
+      "-Wunreachable-code", // Warn about code that can never be executed
+
+      // --- DEBUG INFO & OPTIMIZATION ---
+      "-g", // Generate debug symbols (so the debugger works)
+      // "-Og", // Optimize gently, keeping the debug experience intact
+
+      // --- SANITIZERS (catch bugs at runtime) ---
+      "-fsanitize=address,undefined", // AddressSanitizer (memory bugs) + UBSan (undefined behavior)
+      "-fno-omit-frame-pointer", // Keep stack frames so sanitizer traces are readable
+
+      // --- INPUT / OUTPUT ---
+      "$ZED_FILE", // The file currently open in Zed (auto-filled by Zed)
+      "-lm", // Link the math library (sin, pow, exp, etc.) — MUST come after the source
+      "-o", // "Output" — tells gcc where to write the binary
+      "$ZED_DIRNAME/$ZED_STEM.out", // Output path: same folder, same name, .out extension
     ],
+    "cwd": "$ZED_DIRNAME",
     "use_new_terminal": false,
   },
   {
@@ -22,7 +39,7 @@
     "command": "bash",
     "args": [
       "-c",
-      "'gcc -Wall -Wextra -pedantic -g -Og -lm \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\"'",
+      "'gcc -std=c17 -Wall -Wextra -pedantic -Wshadow -Wconversion -Wstrict-prototypes -Wmissing-prototypes -Wformat=2 -Wunreachable-code -g -Og -fsanitize=address,undefined -fno-omit-frame-pointer \"$ZED_FILE\" -lm -o \"$ZED_DIRNAME/$ZED_STEM.out\" && ASAN_OPTIONS=\"detect_leaks=1:abort_on_error=1:halt_on_error=1\" UBSAN_OPTIONS=\"print_stacktrace=1:abort_on_error=1:halt_on_error=1\" \"$ZED_DIRNAME/$ZED_STEM.out\"'",
     ],
     "use_new_terminal": false,
   },
@@ -31,16 +48,16 @@
     "command": "bash",
     "args": [
       "-c",
-      "'gcc -Wall -Wextra -pedantic -g -Og -lm \"$ZED_FILE\" -o \"$ZED_DIRNAME/$ZED_STEM.out\" && \"$ZED_DIRNAME/$ZED_STEM.out\" < \"$ZED_DIRNAME/input.txt\" | tee \"$ZED_DIRNAME/output.txt\"'",
+      "'gcc -std=c17 -Wall -Wextra -pedantic -Wshadow -Wconversion -Wstrict-prototypes -Wmissing-prototypes -Wformat=2 -Wunreachable-code -g -Og -fsanitize=address,undefined -fno-omit-frame-pointer \"$ZED_FILE\" -lm -o \"$ZED_DIRNAME/$ZED_STEM.out\" && ASAN_OPTIONS=\"detect_leaks=1:abort_on_error=1:halt_on_error=1\" UBSAN_OPTIONS=\"print_stacktrace=1:abort_on_error=1:halt_on_error=1\" \"$ZED_DIRNAME/$ZED_STEM.out\" < \"$ZED_DIRNAME/input.txt\" | tee \"$ZED_DIRNAME/output.txt\"'",
     ],
     "use_new_terminal": false,
   },
   {
-    "label": "Run C (Sanitazers)",
+    "label": "Run + Input + Test C",
     "command": "bash",
     "args": [
       "-c",
-      "'gcc -std=c17 -Wall -Wextra -pedantic -g -O1 -fsanitize=address,undefined -lm\"${ZED_FILE}\" -o \"${ZED_DIRNAME}/${ZED_STEM}.san\" && \"${ZED_DIRNAME}/${ZED_STEM}.san\"'",
+      "'gcc -std=c17 -Wall -Wextra -pedantic -Wshadow -Wconversion -Wstrict-prototypes -Wmissing-prototypes -Wformat=2 -Wunreachable-code -g -Og -fsanitize=address,undefined -fno-omit-frame-pointer \"$ZED_FILE\" -lm -o \"$ZED_DIRNAME/$ZED_STEM.out\" && ASAN_OPTIONS=\"detect_leaks=1:abort_on_error=1:halt_on_error=1\" UBSAN_OPTIONS=\"print_stacktrace=1:abort_on_error=1:halt_on_error=1\" \"$ZED_DIRNAME/$ZED_STEM.out\" < \"$ZED_DIRNAME/input.txt\" > \"$ZED_DIRNAME/output.txt\" && diff --unified --color=always \"$ZED_DIRNAME/expected.txt\" \"$ZED_DIRNAME/output.txt\" && echo \"- TEST PASS\" || echo \"- TEST FAIL\"'",
     ],
     "use_new_terminal": false,
   },
